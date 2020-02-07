@@ -10,14 +10,24 @@ body{
 
 div{
     width: 100%;
+    padding: 3px;
+}
+
+header{
+    width: 100%;
+    margin: auto;
+    padding: 5px;
+    text-align: center;
 }
 
 div.table{
     margin: 10px;
+    padding: 5px;
 }
 
 div.json_record{
     margin: 10px;
+    padding: 2px;
 }
 
 #content {
@@ -30,6 +40,7 @@ div.form {
     margin: 20px;
     width: 90%;
     margin: 0 auto;
+    padding: 12px;
 }
 
 textarea{
