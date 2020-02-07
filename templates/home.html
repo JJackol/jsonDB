@@ -5,6 +5,23 @@
 {% endblock %}
 
 {% block body %}
+
+    <div class="h">
+
+    <table style="text-align: center; width: 100%">
+
+        <tr>
+            <th>Nr of json files</th>
+            <th>Nr of all values in all files</th>
+        </tr>
+        <tr >
+            <td>{{ nr_files }}</td>
+            <td>{{ nr_val }}</td>
+        </tr>
+    </table>
+
+    </div>
+
     <div class="table">
 
     {% for file in files %}
@@ -17,9 +34,10 @@
 
     <div class="form">
 
-        <form action="/" method="POST">
-            <input type="textbox" name="content" id="content">
-            <input type="submit" value="Add json">
+        <form action="/" method="POST" id="my">
+            <textarea name="content" id="content" form="my"></textarea>
+            <br>
+            <input type="submit" id="content" value="Add json">
         </form>
 
     </div>
