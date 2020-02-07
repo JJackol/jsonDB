@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect,  json
 
 from flask_sqlalchemy import SQLAlchemy
+from count import count_values_in_multiple_str
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///local.db'
@@ -11,9 +12,7 @@ class JsonFile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     data = db.Column(db.String(500), nullable=False)
 
-    def __init__(self, **kwargs):
-        super(JsonFile, self).__init__(**kwargs)
-        self.data = kwargs['data']
+
 
     def __repr__(self):
         return '<JsonFile - id: %s>' % self.id
@@ -28,7 +27,12 @@ def hello_world():
 
     else:
         files = [ f.data for f in JsonFile.query.all() ]
-        return render_template('home.html', files=files)
+        nrOfVal = count_values_in_multiple_str(files)
+        return render_template('home.html',
+                               files=files,
+                               nr_val=nrOfVal,
+                               nr_files=len(files)
+                               )
 
 
 def add_json(data=None):
