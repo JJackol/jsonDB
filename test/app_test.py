@@ -6,8 +6,6 @@ from count import count_values_in_multiple_str, count_values
 
 class AppSuite(unittest.TestCase):
 
-
-
     def test_count_values_in_list(self):
         list = [
             '{"a":0, "b":0, "d":{"c": 1, "a":0}}',
