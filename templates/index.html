@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block head %}{% endblock %}
+</head>
+<body>
+
+    <header>
+        <h1>JSON DB</h1>
+    </header>
+
+    <div>
+    {% block body %}{% endblock %}
+    </div>
+
+</body>
+</html>
