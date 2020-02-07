@@ -5,4 +5,23 @@
 {% endblock %}
 
 {% block body %}
+    <div class="table">
+
+    {% for file in files %}
+        <div class="json_record">
+        {{ file }}
+        </div>
+    {% endfor %}
+
+    </div>
+
+    <div class="form">
+
+        <form action="/" method="POST">
+            <input type="textbox" name="content" id="content">
+            <input type="submit" value="Add json">
+        </form>
+
+    </div>
+
 {% endblock %}
