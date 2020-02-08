@@ -1,14 +1,18 @@
 from flask import Flask, render_template, request, redirect,  json
-from flask_json import JsonError, json_response, FlaskJSON
-
+from flask_restful import Resource, Api
 from flask_sqlalchemy import SQLAlchemy
+from flask_json import JsonError, json_response, FlaskJSON
+from flask_cors import CORS
+
 from count import count_values_in_multiple_str
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///local.db'
 db = SQLAlchemy(app)
 FlaskJSON(app)
+CORS(app)
 
+api = Api(app) #rest api
 
 class JsonFile(db.Model):
     """JSON file table"""
@@ -49,6 +53,14 @@ def add_json(data=None):
         return redirect('/home')
     except:
         return 'There was a problem adding your json'
+
+
+class JSONList(Resource):
+    def get(self):
+        return [ {"id":f.id, "data":json.loads(f.data)} for f in JsonFile.query.all() ]
+
+
+api.add_resource(JSONList, '/list')
 
 if __name__ == '__main__':
     app.run(debug=True)
