@@ -1,6 +1,6 @@
 # from urllib import request
 
-from flask import Flask, render_template, request, redirect, json, sessions
+from flask import Flask, render_template, request, redirect, json, jsonify
 from flask_restful import Resource, Api
 from flask_sqlalchemy import SQLAlchemy
 from flask_json import JsonError, json_response, FlaskJSON
@@ -27,13 +27,22 @@ class JsonFile(db.Model):
 
 
 class JSONList(Resource):
-    """REST API - endpoint :/list"""
-
+    """REST API - endpoint :/listsss"""
     def get(self):
-        return [json.loads(f.data) for f in JsonFile.query.all()]
+        q = JsonFile.query.all()
+        nrOfVal = count_values_in_multiple_str([record.data for record in q])
+        stats = {"nr_of_files": len(q), "nr_values": nrOfVal}
+        return jsonify(stat=stats, jsons=[json.loads(f.data) for f in q])
+
+    def post(self):
+        data = request.form['content']
+        if add_json(data):
+            return jsonify(done=True)
+        else:
+            return jsonify(done=False)
 
 
-api.add_resource(JSONList, '/listsss')
+api.add_resource(JSONList, '/list')
 
 
 @app.route('/home', methods=['POST', 'GET'])
@@ -58,7 +67,7 @@ def hello_world():
                                )
 
 
-@app.route('/list', methods=['POST', 'GET'])
+@app.route('/lists', methods=['POST', 'GET'])
 @cross_origin(origins="*", methods=['POST', 'GET', 'PUT'])
 def lista():
     print("lista wita")
@@ -68,7 +77,7 @@ def lista():
         data = request.form['content']
         print(data)
         if add_json(data):
-            return json_response(done=True)
+            return jsonify(done=True)
         else:
             return JsonError()
 
@@ -76,7 +85,7 @@ def lista():
         q = JsonFile.query.all()
         nrOfVal = count_values_in_multiple_str([record.data for record in q])
         stats = {"nr_of_files": len(q), "nr_values": nrOfVal}
-        return json_response(stat=stats, jsons=[json.loads(f.data) for f in q])
+        return jsonify(stat=stats, jsons=[json.loads(f.data) for f in q])
 
 
 def add_json(data=None):
