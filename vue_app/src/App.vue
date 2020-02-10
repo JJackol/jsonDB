@@ -7,7 +7,7 @@
     >
       <v-spacer></v-spacer>
       <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        href="https://github.com/JJackol/"
         target="_blank"
         text>
         <span class="mr-2">Latest Release</span>

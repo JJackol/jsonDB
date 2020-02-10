@@ -6,6 +6,7 @@ import VueAxiosCors from 'vue-axios-cors'
 import vuetify from './plugins/vuetify';
 import AxiosPlugin from 'vue-axios-cors';
 
+
 Vue.use(AxiosPlugin, Axios)
 Vue.config.productionTip = false;
 Vue.use(Vuex);

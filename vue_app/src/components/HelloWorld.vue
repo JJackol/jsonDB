@@ -24,7 +24,7 @@
 </template>
 
 <script>
-//import axios from 'axios'
+import axios from 'axios'
 import MyStats from "./MyStats";
 import List_el from './List_el'
 import AddJson from "./AddJson";
@@ -50,7 +50,7 @@ Vue.use(AxiosPlugin);
                 AccessControlAllowOrigin: "*",
 
             }
-            this.$axios(options)
+            axios(options)
                 .then( res => this.data = res.data)
                 .catch((err) => {
                     console.error('Login failed.', err);
@@ -63,7 +63,7 @@ Vue.use(AxiosPlugin);
                 AccessControlAllowOrigin: "*",
 
             }
-            this.$axios(options)
+            axios(options)
                 .then( res => this.data = res.data)
                 .catch((err) => {
                     console.error('Login failed.', err);
