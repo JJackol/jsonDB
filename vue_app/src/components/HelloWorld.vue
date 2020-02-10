@@ -45,7 +45,7 @@ Vue.use(AxiosPlugin);
 
     created: function () {
             const options = {
-                url: 'http://0.0.0.0:5000/list',
+                url: 'http://172.23.0.1:5000/list',
                 method: 'GET',
                 AccessControlAllowOrigin: "*",
 
@@ -58,7 +58,7 @@ Vue.use(AxiosPlugin);
          },
     mounted() {
             const options = {
-                url: 'http://0.0.0.0:5000/list',
+                url: 'http://172.23.0.1:5000/list',
                 method: 'GET',
                 AccessControlAllowOrigin: "*",
 
