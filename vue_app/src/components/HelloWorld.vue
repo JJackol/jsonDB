@@ -1,39 +1,85 @@
 <template>
-  <div>
+<div class="contener pa-3 pa-10">
 
-    <List id="lista" v-bind:jsons="jsons"></List>
-  </div>
+<v-container fill-height>
+  <v-row align="center"
+      justify="center">
+
+      <v-col>
+        <MyStats v-bind:stat="data.stat"></MyStats>
+
+
+        <AddJson></AddJson>
+
+
+        <List_el v-bind:jsons="data.jsons"></List_el>
+
+      </v-col>
+  </v-row>
+</v-container>
+
+
+
+</div>
 </template>
 
 <script>
+//import axios from 'axios'
+import MyStats from "./MyStats";
+import List_el from './List_el'
+import AddJson from "./AddJson";
+import Vue from "vue";
+import AxiosPlugin from "vue-axios-cors";
 
-import axios from 'axios'
-import List from "./List";
+Vue.use(AxiosPlugin);
+  export default {
+    name: 'HelloWorld',
+    components:{AddJson, MyStats, List_el},
 
-export default {
-  name: 'HelloWorld',
-  components: {List},
-  jsons: [],
-  data(){
-    return{
-      jsons: []
-    }
-  },
+    data: () => ({
+      data:{
+        jsons:[],
+        stat:{},
+      }
+    }),
 
-  created: function () {
-    axios.get('http://localhost:5000/list')
-    .then(res => this.jsons = res.data)
-  },
-  mounted() {
-    axios.get('http://localhost:5000/list')
-    .then(res => this.jsons = res.data)
-    .catch(err => console.log(err))
+    created: function () {
+            const options = {
+                url: 'http://0.0.0.0:5000/list',
+                method: 'GET',
+                AccessControlAllowOrigin: "*",
+
+            }
+            this.$axios(options)
+                .then( res => this.data = res.data)
+                .catch((err) => {
+                    console.error('Login failed.', err);
+                })
+         },
+    mounted() {
+            const options = {
+                url: 'http://0.0.0.0:5000/list',
+                method: 'GET',
+                AccessControlAllowOrigin: "*",
+
+            }
+            this.$axios(options)
+                .then( res => this.data = res.data)
+                .catch((err) => {
+                    console.error('Login failed.', err);
+                })
+         }
+
   }
-
-}
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
+<style>
+.contener {
+  margin: auto;
+  padding-top: 20px;
+  padding-bot: 20px;
+  margin: fill;
+  background-color: cornflowerblue;
+  height: 100%;
+}
 </style>

@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  app:
+    build:
+      context: ./py
+    ports:
+      - "5000:5000"
+    expose:
+      - 5000
+    volumes:
+      - ./py/src:/src
+    environment:
+      FLASK_APP: "/src/app.py"
+    command:
+       ["flask", "run"]
+
+  vue:
+    build:
+      context: ./vue_app
+    ports:
+      - "8880:8880"
+    volumes:
+      - ./vue_app:/app
+    command:
+       [ "npm", "run" ,"serve" , "--", "--port", "8880"]
+
+
