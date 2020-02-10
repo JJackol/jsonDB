@@ -1,5 +1,4 @@
 import pytest
-import unittest
 from src.count import *
 
 empty_json = ['{}']
@@ -34,7 +33,6 @@ invalid_json = ['xxx']
 @pytest.mark.parametrize("list,expect", pairs)
 def test_count_values_in_list(list, expect):
     assert expect == (count_values_in_multiple_str(list))
-
 
 def test_count_values_in_empty_list():
     list = []
