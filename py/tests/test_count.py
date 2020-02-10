@@ -24,7 +24,8 @@ pairs = [(empty_json, 0),
          (nested_jsons1, 5),
          (nested_jsons2, 10),
          (nested_jsons3, 8),
-         (list_in_json, 9+3)
+         (list_in_json, 9+3),
+         (empty_list, 0)
          ]
 
 invalid_json = ['xxx']
@@ -41,6 +42,10 @@ def test_count_values_in_empty_list():
 
 def test_count_values_in_empty_dict():
     list = ['{}']
-    assert 0  == count_values_in_multiple_str(list)
+    assert 0 == count_values_in_multiple_str(list)
+
+def test_count_values_in_empty_dict():
+    with pytest.raises(Exception):
+        count_values_in_multiple_str(invalid_json)
 
 
