@@ -1,21 +1,20 @@
-#from urllib import request
+# from urllib import request
 
-from flask import Flask, render_template, request, redirect,  json
+from flask import Flask, render_template, request, redirect, json, sessions
 from flask_restful import Resource, Api
 from flask_sqlalchemy import SQLAlchemy
 from flask_json import JsonError, json_response, FlaskJSON
 from flask_cors import CORS, cross_origin
 
 from src.count import count_values_in_multiple_str
-from pip._internal import req
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/local.db'
 
 db = SQLAlchemy(app)
 FlaskJSON(app)
-cors = CORS(app,  resources={r"/list": {"origins": "*"}}, origins="*")
-api = Api(app) #rest api
+cors = CORS(app, resources={r"/list": {"origins": "*"}}, origins="*")
+api = Api(app)  # rest api
 
 
 class JsonFile(db.Model):
@@ -29,16 +28,20 @@ class JsonFile(db.Model):
 
 class JSONList(Resource):
     """REST API - endpoint :/list"""
-    def get(self):
-        return [ json.loads(f.data) for f in JsonFile.query.all() ]
 
-api.add_resource(JSONList, '/listsss' )
+    def get(self):
+        return [json.loads(f.data) for f in JsonFile.query.all()]
+
+
+api.add_resource(JSONList, '/listsss')
+
 
 @app.route('/home', methods=['POST', 'GET'])
 @app.route('/', methods=['POST', 'GET'])
 @cross_origin(origins="*", methods=['POST'])
 def hello_world():
     print("hello")
+    print(request)
     if request.method == 'POST':
 
         data = request.form['content']
@@ -46,7 +49,7 @@ def hello_world():
         return redirect('/home')
 
     else:
-        files = [ f.data for f in JsonFile.query.all() ]
+        files = [f.data for f in JsonFile.query.all()]
         nrOfVal = count_values_in_multiple_str(files)
         return render_template('home.html',
                                files=files,
@@ -54,21 +57,26 @@ def hello_world():
                                nr_files=len(files)
                                )
 
+
 @app.route('/list', methods=['POST', 'GET'])
-@cross_origin(origins="*", methods=['POST', 'GET'])
+@cross_origin(origins="*", methods=['POST', 'GET', 'PUT'])
 def lista():
+    print("lista wita")
+    print(request.form)
     if request.method == 'POST':
-        print (request)
-        return json_response(done=request)
+        print(json.dumps(request.form, app))
         data = request.form['content']
         print(data)
-        return json_response(done=add_json(data))
+        if add_json(data):
+            return json_response(done=True)
+        else:
+            return JsonError()
 
     if request.method == 'GET':
         q = JsonFile.query.all()
         nrOfVal = count_values_in_multiple_str([record.data for record in q])
         stats = {"nr_of_files": len(q), "nr_values": nrOfVal}
-        return json_response(stat=stats, jsons=[ json.loads(f.data) for f in q ])
+        return json_response(stat=stats, jsons=[json.loads(f.data) for f in q])
 
 
 def add_json(data=None):
@@ -80,7 +88,6 @@ def add_json(data=None):
         return True
     except:
         return False
-
 
 
 if __name__ == '__main__':
