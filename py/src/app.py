@@ -29,10 +29,10 @@ class JsonFile(db.Model):
 class JSONList(Resource):
     """REST API - endpoint :/listsss"""
     def get(self):
-        q = JsonFile.query.all()
+        q = (JsonFile.query.all())
         nrOfVal = count_values_in_multiple_str([record.data for record in q])
         stats = {"nr_of_files": len(q), "nr_values": nrOfVal}
-        return jsonify(stat=stats, jsons=[json.loads(f.data) for f in q])
+        return jsonify(stat=stats, jsons=reversed([json.loads(f.data) for f in q]))
 
     def post(self):
         data = request.form['content']

@@ -50,11 +50,11 @@ export default {
       methods: {
         my_submit: function () {
             const options = {
-                url: 'http://172.23.0.1:5000/list',
+                url: 'http://0.0.0.0:5000/list',
                 method: 'POST',
                 AccessControlAllowOrigin: "*",
             }
-            axios.post('http://172.23.0.1:5000/list', {"content": this.json}  , options)
+            axios.post('http://0.0.0.0:5000/list', {"content": this.json}  , options)
                 .then( request => {
                     if(request.data['done'])
                         alert("JSON inserted into DB")

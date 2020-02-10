@@ -7,7 +7,7 @@
     >
       <v-spacer></v-spacer>
       <v-btn
-        href="https://github.com/JJackol/"
+        href="https://github.com/JJackol/jsonDB"
         target="_blank"
         text>
         <span class="mr-2">Latest Release</span>

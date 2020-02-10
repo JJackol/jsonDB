@@ -1,12 +1,12 @@
  <template v-slot:default="props">
 
-   <v-col class="colu mx-auto py-5 ">
-      <v-row class="m_cell  pa-5 " v-for="(item, i) in jsons"
+   <v-col class="colu mx-auto py-3 ">
+      <v-row class="m_cell  pa-sm-2 " v-for="(item, i) in jsons"
             :key="i"
             cols="1"
              filled
             auto-grow
-             pa3
+             pa2
           >
             <v-card class="elem">
               <v-card-title class="subheading font-weight-bold">{{ i }}</v-card-title>
@@ -17,8 +17,8 @@
                 <v-list-item
                   v-for="(key, index) in item"
                   :key="index">
-                  <v-list-item-content :class="{ 'blue--text': key === key }">{{ index }}:</v-list-item-content>
-                  <v-list-item-content class="align-end" :class="{ 'blue--text': key === key }">{{ key }}</v-list-item-content>
+                  <v-list-item-content  :class="{ 'blue--text':0}">{{ index }}:</v-list-item-content>
+                  <v-list-item-content  class="align-end" :class="{ 'blue--text':10  }">{{ key }}</v-list-item-content>
                 </v-list-item>
               </v-list>
 
@@ -42,8 +42,8 @@ export default Vue.extend({
 .colu {
   width: 50%;
   margin: auto;
-  padding-top: 20px;
-  padding-bot: 20px;
+  padding-top: 2px;
+  padding-bot: 2px;
   background-color: dodgerblue;
   height: fit-content;
 }
