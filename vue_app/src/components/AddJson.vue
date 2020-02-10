@@ -2,20 +2,20 @@
     <div class="input" >
         <v-container fluid>
 
-             <v-form ref="form" class="son" name="jsonstr" id="jsonstr" method="post" >
+             <v-form ref="form" class="son" name="jsonstr" id="my_jsonstr" method="post" action="http://172.23.0.1:5000/list">
 
                 <v-textarea
-                        class="content"
+                type="text"
+                class="content"
                 name="content"
                 id = "content"
                 filled
                 label="Json input"
                 auto-grow
-                value=""
                 color="#ffffff"
                 background-color="#eeeeff"
               ></v-textarea>
-          <v-btn id="content"  class="mr-4" @click="submit">submit</v-btn>
+          <v-btn type="submit" @click="my_submit" class="mr-4" >submit</v-btn>
         </v-form>
         </v-container>
 
@@ -31,32 +31,29 @@
 import Vue from "vue";
 import AxiosPlugin from "vue-axios-cors";
 
-Vue.use(AxiosPlugin, AxiosPlugin.default);
+Vue.use(AxiosPlugin);
 
 export default {
     name: "AddJson",
+
     data: () => ({
         d:{},
-        json:String
+        json:"String-v-model",
+        out: {content: ""},
       }),
     //props: {json:String},
 
 
       methods: {
-        submit: function () {
+        my_submit: function () {
             const options = {
                 url: 'http://172.23.0.1:5000/list',
                 method: 'POST',
                 AccessControlAllowOrigin: "*",
-
-
             }
-            this.$axios(options, new FormData(this.$refs.form.$el))
-                .then( res => this.d = res.data )
-                .catch((err) => {
-                    alert("bad input "+ err.toString())
-                })
+            options
          },
+
         clear () {
         },
       },
