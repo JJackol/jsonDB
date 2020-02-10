@@ -1,4 +1,3 @@
-
 from flask import json
 
 def count_values_in_multiple_str(list):
@@ -7,12 +6,12 @@ def count_values_in_multiple_str(list):
         count += count_values( json.loads(j) )
     return count
 
-def count_values(dict):
+def count_values(d):
     count = 0
-    for k, v in dict.items():
-        if type(v) == type({}):
+    for k, v in d.items():
+        if isinstance(v, dict):
             count += count_values(v)
-    return count + len(dict)
+    return count + len(d)
 
 list = [
     '{"a":0, "b":0, "d":{"c": 1, "a":0}}',
@@ -21,5 +20,3 @@ list = [
 #print(count_values(json.loads(list[0])))
 #print(len(json.loads(list[0]).keys()))
 #print(count_values_in_multiple_str(list))
-#print(type({}))
-
