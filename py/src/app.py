@@ -1,5 +1,5 @@
 # from urllib import request
-
+import os
 from flask import Flask, render_template, request, redirect, json, jsonify
 from flask_restful import Resource, Api
 from flask_sqlalchemy import SQLAlchemy
@@ -15,6 +15,9 @@ db = SQLAlchemy(app)
 FlaskJSON(app)
 cors = CORS(app, resources={r"/list": {"origins": "*"}}, origins="*")
 api = Api(app)  # rest api
+
+if not os.path.exists('db/local.db'):
+    db.create_all()
 
 
 class JsonFile(db.Model):
