@@ -1,10 +1,17 @@
 # Readme
 
+## Run
+
+`docker-compose build` to build docker images
+
 ## DB init
 
-to create db run those commands in virtualenv with requirements installed
+After cloning run this command to set up db and node_modules
 
-```python
-from app import db
-db.create_all()
+```shell script
+./startup.sh
 ```
+
+## Run
+
+`docker-compose up` to serve app

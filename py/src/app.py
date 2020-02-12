@@ -26,12 +26,12 @@ class JsonFile(db.Model):
         return '<JsonFile - id: %s>' % self.id
 
 
-if not db.exists:
+if not db.is:
     db.create_all()
     print("###info db created!")
 
 class JSONList(Resource):
-    """REST API - endpoint :/listsss"""
+    """REST API - endpoint :/list"""
     def get(self):
         q = (JsonFile.query.all())
         nrOfVal = count_values_in_multiple_str([record.data for record in q])
@@ -44,8 +44,6 @@ class JSONList(Resource):
             return jsonify(done=True)
         else:
             return jsonify(done=False)
-
-
 api.add_resource(JSONList, '/list')
 
 
