@@ -3,7 +3,6 @@ version: "3"
 services:
 
   app:
-    container_name: FlaskApp
     build:
       context: ./py
     ports:
@@ -18,7 +17,6 @@ services:
        ["flask", "run"]
 
   vue:
-    container_name: VueApp
     build:
       context: ./vue_app
     ports:
