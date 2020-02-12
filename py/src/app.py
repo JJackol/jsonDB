@@ -26,10 +26,6 @@ class JsonFile(db.Model):
         return '<JsonFile - id: %s>' % self.id
 
 
-if not db.is:
-    db.create_all()
-    print("###info db created!")
-
 class JSONList(Resource):
     """REST API - endpoint :/list"""
     def get(self):
