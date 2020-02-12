@@ -27,7 +27,7 @@ class JsonFile(db.Model):
 
 
 if not db.exists:
-    #db.create_all()
+    db.create_all()
     print("###info db created!")
 
 class JSONList(Resource):
@@ -104,7 +104,6 @@ def add_json(data=None):
 
 
 if __name__ == '__main__':
-
     app.run(debug=True)
     #if not os.path.exists('db/local.db'):
 
