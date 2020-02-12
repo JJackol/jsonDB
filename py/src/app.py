@@ -16,10 +16,6 @@ FlaskJSON(app)
 cors = CORS(app, resources={r"/list": {"origins": "*"}}, origins="*")
 api = Api(app)  # rest api
 
-if not os.path.exists('db/local.db'):
-    db.create_all()
-    print("###info db created!")
-
 
 class JsonFile(db.Model):
     """JSON file table"""
@@ -105,3 +101,7 @@ def add_json(data=None):
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+if not os.path.exists('db/local.db'):
+    db.create_all()
+    print("###info db created!")
