@@ -26,6 +26,10 @@ class JsonFile(db.Model):
         return '<JsonFile - id: %s>' % self.id
 
 
+if not db.exists:
+    #db.create_all()
+    print("###info db created!")
+
 class JSONList(Resource):
     """REST API - endpoint :/listsss"""
     def get(self):
@@ -100,8 +104,10 @@ def add_json(data=None):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
 
-if not os.path.exists('db/local.db'):
-    db.create_all()
-    print("###info db created!")
+    app.run(debug=True)
+    #if not os.path.exists('db/local.db'):
+
+
+
+
