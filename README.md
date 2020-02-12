@@ -1,6 +1,6 @@
 # Readme
 
-## Run
+## Build
 
 `docker-compose build` to build docker images
 
