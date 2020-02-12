@@ -18,6 +18,7 @@ api = Api(app)  # rest api
 
 if not os.path.exists('db/local.db'):
     db.create_all()
+    print("###info db created!")
 
 
 class JsonFile(db.Model):
