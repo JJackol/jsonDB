@@ -9,7 +9,7 @@
 After cloning run this command to set up db and node_modules
 
 ```shell script
-./startup.sh
+sh startup.sh
 ```
 
 ## Run
