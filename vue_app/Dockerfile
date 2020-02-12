@@ -10,6 +10,6 @@ RUN npm i -g @vue/cli
 RUN npm i -g @vue/cli-service-global
 RUN npm install
 
-EXPOSE 8880
-CMD [ "npm", "run" ,"serve" ,"-p" , "8880"]
+EXPOSE 8080
+CMD [ "npm", "run" ,"serve"]
 

@@ -19,6 +19,7 @@ COPY ./src/ ./
 RUN pip install -r requirements.txt
 
 COPY init_db.py /init_db.py
-#RUN [ -f db/local.db  ] || python /init_db.py
+RUN [ -f db/local.db  ] || python /init_db.py
+
 
 CMD ["flask" , "run" ]
