@@ -23,11 +23,17 @@ pairs = [(empty_json, 0),
          (nested_jsons1, 5),
          (nested_jsons2, 10),
          (nested_jsons3, 8),
-         (list_in_json, 9+3),
+         (list_in_json, 4),
          (empty_list, 0)
          ]
 
-invalid_json = ['xxx']
+invalid_jsons = [
+    ['xxx'],
+    ['{"a":0, "b":0, "d":0'],
+    ['{a:0, "b":0, "d":0}'],
+    ['{"a":0, "b:0, "d":0}'],
+    ['{"a":0, "b":0, "d":0}', '{"a":0 "b":0, "d":0}']
+]
 
 
 @pytest.mark.parametrize("list,expect", pairs)
@@ -42,8 +48,9 @@ def test_count_values_in_empty_dict():
     list = ['{}']
     assert 0 == count_values_in_multiple_str(list)
 
-def test_count_values_in_empty_dict():
+@pytest.mark.parametrize("json", invalid_jsons)
+def test_count_values_exceptions_expected(json):
     with pytest.raises(Exception):
-        count_values_in_multiple_str(invalid_json)
+        count_values_in_multiple_str(json)
 
 

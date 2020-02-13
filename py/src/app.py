@@ -20,7 +20,7 @@ api = Api(app)  # rest api
 class JsonFile(db.Model):
     """JSON file table"""
     id = db.Column(db.Integer, primary_key=True)
-    data = db.Column(db.String(500), nullable=False)
+    data = db.Column(db.Text, nullable=False)
 
     def __repr__(self):
         return '<JsonFile - id: %s>' % self.id
@@ -90,6 +90,7 @@ def add_json(data=None):
     try:
         obj = json.loads(data, app)
         json_file = JsonFile(data=json.dumps(obj, app))
+        
         db.session.add(json_file)
         db.session.commit()
         return True
